@@ -24,6 +24,7 @@ describe Listing do
       )
   }
 
+
   # create a Listing (i.e. one property)
   describe '.create' do
 

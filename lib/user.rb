@@ -7,9 +7,9 @@ class User
     return 'Email exists' if User.find(by: 'email', term: email)
     return 'Username exists' if User.find(by: 'username', term: username)
 
-    encrypted_password = BCrypt::Password.create(password)
+    # encrypted_password = BCrypt::Password.create(password)
     sql = "INSERT INTO users (email, password, name, username) "
-    sql += "VALUES('#{email}', '#{encrypted_password}', '#{name}', '#{username}') "
+    sql += "VALUES('#{email}', '#{password}', '#{name}', '#{username}') "
     sql += "RETURNING id, email, name, username;"
     result = DBConnection.query(sql)
 
@@ -25,7 +25,9 @@ class User
     sql = "SELECT * FROM users WHERE email = '#{email}';"
     result = DBConnection.query(sql)
     return nil unless result.any?
-    return nil unless BCrypt::Password.new(result[0]['password']) == password
+    # return nil unless BCrypt::Password.new(result[0]['password']) == password
+    return nil unless result[0]['password'] == password
+
 
     User.new(
       id: result[0]['id'],
