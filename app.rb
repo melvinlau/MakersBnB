@@ -3,18 +3,18 @@ require 'sinatra/flash'
 require 'sinatra/activerecord'
 require 'bcrypt'
 
+require_relative './lib/user'
 require_relative './lib/listing'
 
 class MakersBnB < Sinatra::Base
 
-  set :database_file, 'config/database.yml'
+  register Sinatra::ActiveRecordExtension
+  register Sinatra::Flash
 
-  enable :sessions, :method_override
+  set :database_file, 'config/database.yml'
   set :public_folder, File.dirname(__FILE__) + "/static"
 
-  register Sinatra::Flash
-  register Sinatra::ActiveRecordExtension
-
+  enable :sessions, :method_override
 
   run! if app_file == $0
 

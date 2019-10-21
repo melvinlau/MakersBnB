@@ -1,2 +1,3 @@
-class Listing < ActiveRecord:: Base
+class Listing < ActiveRecord::Base
+  belongs_to :user
 end
