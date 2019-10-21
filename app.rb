@@ -13,7 +13,7 @@ require './lib/peep'
 # Helpers
 require './database_connection'
 
-class Chitter < Sinatra::Base
+class MakersBnB < Sinatra::Base
 
   enable :sessions, :method_override
   set :public_folder, File.dirname(__FILE__) + "/static"
