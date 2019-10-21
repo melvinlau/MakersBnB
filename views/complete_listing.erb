@@ -1,0 +1,21 @@
+<input type="button" value="Back" onclick="history.back()">
+
+<h2> @listing.title </h2>
+<h4> Hosted by: @user.username </h4>
+
+<div>
+  Description: @listing.description 
+<br>
+  Price per night: @listing.price 
+<br>
+  Location: @listing.location
+<br>
+  Availabilty: @listing.date
+</div>
+
+<% if @user && @user.id == peep.user.id %>
+              <form action="/peeps/<%= peep.id %>/delete" method="post">
+                <input type="hidden" name="peep_id" value="<%= peep.id %>">
+                <input class="btn btn-dark btn-sm" type="submit" value="Delete">
+              </form>
+            <% end %>

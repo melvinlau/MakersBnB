@@ -1,0 +1,17 @@
+<br>
+<input type="button" value="Back" onclick="history.back()">
+<br>
+<form action ='/create' method="post">
+ <input type="text" name="title" id="title" placeholder="Title" required>
+ <br>
+  <input type="text" name="description" id="description" placeholder="Property Description" required>
+  <br>
+   <input type="text" name="price" id="price" placeholder="Price Per Night" required>
+   <br>
+    <input type="text" name="location" id="location" placeholder="Property Location" required>
+    <br>
+    <%# <input type="text" name="images" placeholder="Property Image" required> %>
+     <input type="date" name="date" id="date" placeholder="Dates Available" required>
+     <br>
+     <input type="submit" name="submit" id='submit' value="Submit Listing">
+</form>
