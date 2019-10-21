@@ -3,12 +3,10 @@ require 'sinatra/flash'
 require 'pg'
 require 'bcrypt'
 
-# require './datamapper_setup'
-
 # Models
 require './lib/db_connection'
 require './lib/user'
-require './lib/peep'
+require './lib/listings'
 
 # Helpers
 require './database_connection'

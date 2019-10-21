@@ -5,6 +5,8 @@ require 'capybara'
 require 'capybara/rspec'
 require 'rspec'
 
+require 'bcrypt'
+
 ENV['ENVIRONMENT'] = 'test'
 
 require_relative './setup_test_database'

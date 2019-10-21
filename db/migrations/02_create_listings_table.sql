@@ -6,4 +6,4 @@ CREATE TABLE listings(
   location VARCHAR(60),
   photo_src VARCHAR(60),
   available_date DATE,
-  user_id VARCHAR(60));
+  user_id INTEGER REFERENCES users (id));

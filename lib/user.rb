@@ -1,4 +1,5 @@
 require './database_connection'
+require 'bcrypt'
 
 class User
 
