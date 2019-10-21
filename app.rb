@@ -41,11 +41,13 @@ class Chitter < Sinatra::Base
   end 
 
   get '/view' do 
-    erb :complete_listing 
+    @page = erb(:complete_listing)
+    erb(:template)
   end 
 
-  get '/listing/new' do
-    erb(:add_listing)
+  get '/new-listing' do
+    @page = erb(:add_listing)
+    erb(:template)
   end
 
   # Sign Up
