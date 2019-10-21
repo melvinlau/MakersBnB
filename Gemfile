@@ -8,6 +8,8 @@ gem 'pg'
 gem 'rake'
 gem 'sinatra'
 gem 'sinatra-flash'
+gem 'sinatra-activerecord'
+gem 'activerecord'
 
 group :test do
   gem 'capybara'
