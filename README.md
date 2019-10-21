@@ -1,22 +1,22 @@
 # MakersBnB
 
-##Project Description##
+## Project Description ##
 
 We would like a web application that allows users to list spaces they have available, and to hire spaces for the night.
 
-##Project Skills##
+## Project Skills ##
 
-###Planning###
+### Planning ###
 - Analyse a plan for the appropriate number of stand-ups, meetings, etc.
 - Create and structure a plan for the week
-###Stand-up management###
+### Stand-up management ###
 - Manage stand-up meetings efficiently and with a solution focus
-###Retrospectives###
+### Retrospectives ###
 - Analyse daily progress to elicit weaker topic area focus
 - Evaluate own progress throughout the week
 - Create a repository containing the week's activity and retrospective notes
 
-##User stories##
+## User stories ##
 
 ```
 As a landlord
