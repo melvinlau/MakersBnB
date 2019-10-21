@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-12 mt-3">
-    <h1>MakersBnb // PUBLIC</h1>
+    <h1>MakersBnb</h1>
   </div>
 </div>
 
@@ -12,16 +12,19 @@
     if @feed.length > 0 
 
      @feed.each do |peep| 
-        <div class="peep m-3 p-4" id="peep">
 
+        <div class="peep m-3 p-4" id="peep">
+          <a href="/view" id="fill-div">
+            Listing Title
+            </a>
           <div class="author mb-2">
             <strong> peep.user.name</strong>
             <span class="handle ml-2">@peep.user.username</span>
           </div>
 
           <div class="peep-content mb-3"> peep.content</div>
-
         </div>
+        
        end 
 
     else
