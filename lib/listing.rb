@@ -1,4 +1,2 @@
-require 'active_record'
-
-class Listings < ActiveRecord:: Base
+class Listing < ActiveRecord:: Base
 end

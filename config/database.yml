@@ -1,16 +1,16 @@
 default: &default
-adapter: postgresql
-encoding: unicode
-pool: 5
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
 
 development:
-<<: *default
-database: makersbnb
+  <<: *default
+  database: makersbnb
 
 production:
-<<: *default
-database: makersbnb
+  <<: *default
+  database: makersbnb
 
 test:
-<<: *default
-database: makersbnb_test
+  <<: *default
+  database: makersbnb_test
