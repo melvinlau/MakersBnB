@@ -1,10 +1,11 @@
+require 'sinatra'
 require 'sinatra/base'
 require 'sinatra/flash'
 require 'sinatra/activerecord'
 require 'bcrypt'
 
-require_relative './lib/user'
-require_relative './lib/listing'
+require './lib/user'
+require './lib/listing'
 
 class MakersBnB < Sinatra::Base
 

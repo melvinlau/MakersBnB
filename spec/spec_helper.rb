@@ -1,20 +1,20 @@
+# Make sure this spec helper is required in .rspec !
+
+# Require gems
 require 'simplecov'
 require 'simplecov-console'
-
 require 'capybara'
 require 'capybara/rspec'
 require 'rspec'
-
 require 'bcrypt'
 
+# Specify that this is a Test environment
 ENV['ENVIRONMENT'] = 'test'
 
-require_relative './setup_test_database'
-
-# require our Sinatra app file
+# Require our Sinatra app file, which turn requires the model files
 require File.join(File.dirname(__FILE__), '..', 'app.rb')
 
-# tell Capybara about our app class
+# Tell Capybara about our app class
 Capybara.app = MakersBnB
 
 SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter.new([
@@ -26,9 +26,6 @@ SimpleCov.start
 
 RSpec.configure do |config|
 
-  config.before(:each) do
-    setup_test_database
-  end
   config.after(:suite) do
     puts
     puts "\e[33mHave you considered running rubocop? It will help you improve your code!\e[0m"

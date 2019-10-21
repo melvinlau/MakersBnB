@@ -1,5 +1,3 @@
-require 'user'
-
 describe User do
 
   let(:email) { 'test@example.com' }
