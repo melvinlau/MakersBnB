@@ -12,10 +12,21 @@
 <br>
   Availabilty: <%= @listing.available_date %>
 </div>
+<br>
 
-<% if @user %>
-  <form action="#" method="post">
-    <input type="hidden" name="peep_id" value="#">
+<% if @user && @user.id == @listing.user_id %>
+  <form action="/listing/<%= @listing.id %>" method="post">
+    <input type="hidden" name="_method" value="DELETE">
     <input class="btn btn-dark btn-sm" type="submit" value="Delete">
   </form>
+
+<% elsif @user %>
+
+  <form action="#" method="post">
+    <input type="hidden" name="peep_id" value="#">
+    <input class="btn btn-dark btn-sm" type="submit" value="Booking Request">
+  </form>
+
+  <% else %>
+  Log in to book
 <% end %>
