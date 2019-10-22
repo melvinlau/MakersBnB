@@ -1,3 +1,0 @@
-describe Listing do
-
-end

@@ -9,7 +9,8 @@ require 'rspec'
 require 'bcrypt'
 
 # Specify that this is a Test environment
-ENV['ENVIRONMENT'] = 'test'
+ENV['ENV'] = 'test'
+require_relative './database_helpers'
 
 # Require our Sinatra app file, which turn requires the model files
 require File.join(File.dirname(__FILE__), '..', 'app.rb')
@@ -25,6 +26,10 @@ SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter.new([
 SimpleCov.start
 
 RSpec.configure do |config|
+
+  config.before(:each) do
+    setup_test_database
+  end
 
   config.after(:suite) do
     puts

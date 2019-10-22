@@ -48,21 +48,31 @@ class MakersBnB < Sinatra::Base
 
   # Sign Up
   post '/users/new' do
-    user = User.create(
-      email: params[:email],
-      password: params[:password],
-      name: params[:name]
-    )
-    session[:user_id] = user.id
-    session[:user_name] = user.name
+    if User.find_by(email: params[:email])
+      flash[:notice] = 'An account already exists with this email address. Please use another.'
+    else
+      user = User.create(
+        email: params[:email],
+        password: params[:password],
+        name: params[:name]
+      )
+      session[:user_id] = user.id
+      session[:user_name] = user.name
+    end
+
     redirect '/'
   end
 
   # Sign In
   post '/users/session' do
     user = User.authenticate(email: params[:email], password: params[:password])
-    session[:user_id] = user[:user_id]
-    session[:user_name] = user[:user_name]
+
+    if user
+      session[:user_id] = user[:user_id]
+      session[:user_name] = user[:user_name]
+    else
+      flash[:notice] = 'Please check your email or password.'
+    end
     redirect '/'
   end
 
