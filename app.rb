@@ -17,7 +17,9 @@ class MakersBnB < Sinatra::Base
 
   # Index Page
   get '/' do
-    @user = session[:user]
+
+    @user = User.find_by(id: session[:user_id])
+  p "--------------#{@user}---------------"
     @feed = Listing.all
     @page = erb(:index)
     erb(:template)
@@ -59,15 +61,8 @@ class MakersBnB < Sinatra::Base
 
   # Sign In
   post '/users/session' do
-    user = User.authenticate(
-      email: params[:email],
-      password: params[:password]
-    )
-    if user
-      session[:user] = user
-    else
-      flash[:notice] = 'Please check your email or password.'
-    end
+    user = User.find_by(email: params[:email])
+    p session[:user_id] = user.id
     redirect '/'
   end
 
