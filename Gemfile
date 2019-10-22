@@ -1,13 +1,14 @@
 source 'https://rubygems.org'
 
-ruby '2.6.3'
+ruby '2.6.0'
 
-gem 'bcrypt'
-gem 'dm-postgres-adapter'
-gem 'pg'
+gem 'pg' # required for ActiveRecord
+gem 'bcrypt' # required for ActiveRecord
 gem 'rake'
 gem 'sinatra'
 gem 'sinatra-flash'
+gem 'sinatra-activerecord'
+gem 'activerecord'
 
 group :test do
   gem 'capybara'

@@ -1,22 +1,18 @@
+require 'sinatra'
 require 'sinatra/base'
 require 'sinatra/flash'
-require 'pg'
+require 'sinatra/activerecord'
+require 'bcrypt'
 
-# require './datamapper_setup'
 
-# Models
-require './lib/db_connection'
 require './lib/user'
-require './lib/peep'
+require './lib/listing'
 
-# Helpers
-require './database_connection'
-
-class Chitter < Sinatra::Base
-
-  enable :sessions, :method_override
+class MakersBnB < Sinatra::Base
+  set :database_file, 'config/database.yml'
   set :public_folder, File.dirname(__FILE__) + "/static"
-
+  enable :sessions, :method_override
+  register Sinatra::ActiveRecordExtension
   register Sinatra::Flash
 
   # Index Page
