@@ -53,14 +53,7 @@ class MakersBnB < Sinatra::Base
       password: params[:password],
       name: params[:name]
     )
-    session[:user] = User.new(email: user["email"], name: user["name"], password: user["password"], id: user["id"])
-    p user
-    p session
-    # if user == 'Email exists'
-    #   flash[:notice] = 'An account already exists with this email address. Please use another.'
-    # else
-    #   session[:user] = user
-    # end
+    session[:user_id] = user['id']
     redirect '/'
   end
 
