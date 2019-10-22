@@ -6,6 +6,8 @@ require 'bcrypt'
 
 require './lib/user'
 require './lib/listing'
+require './lib/booking_requests'
+
 
 class MakersBnB < Sinatra::Base
   set :database_file, 'config/database.yml'
@@ -23,7 +25,7 @@ class MakersBnB < Sinatra::Base
   end
 
   post '/listing/create' do
-       Listing.create(
+      Listing.create(
       name: params[:name],
       description: params[:description],
       price: params[:price],
@@ -49,6 +51,21 @@ class MakersBnB < Sinatra::Base
 
   delete '/listing/:id' do
     Listing.delete(params[:id])
+    redirect '/'
+  end
+
+  post '/requests' do
+    erb :booking_request_list
+  end
+
+  post '/booking-request/new' do
+    listing = Listing.find_by(id: params[:listing])
+    BookingRequest.create(
+      user_id: listing.user_id,
+      listing_id: listing.id,
+      guest: session[:user_id],
+      requested_date: listing.available_date
+    )
     redirect '/'
   end
 

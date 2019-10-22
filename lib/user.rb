@@ -1,6 +1,7 @@
 class User < ActiveRecord::Base
   has_many :listings
   has_many :bookings
+  has_many :booking_requests
 
 
  def self.authenticate(email:, password:)

@@ -22,9 +22,9 @@
 
 <% elsif @user %>
 
-  <form action="#" method="post">
-    <input type="hidden" name="peep_id" value="#">
-    <input class="btn btn-dark btn-sm" type="submit" value="Booking Request">
+  <form action="/booking-request/new" method="post">
+    <input type="hidden" name="listing" value=<%= @listing.id %>>
+    <input class="btn btn-dark btn-sm" type="submit" value="Request to Book">
   </form>
 
   <% else %>
