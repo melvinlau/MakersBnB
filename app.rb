@@ -17,9 +17,7 @@ class MakersBnB < Sinatra::Base
 
   # Index Page
   get '/' do
-
-    @user = User.find_by(id: session[:user_id])
-  p "--------------#{@user}---------------"
+    @user = User.find_by(id: session[:user_id]) || nil
     @feed = Listing.all
     @page = erb(:index)
     erb(:template)
@@ -27,25 +25,26 @@ class MakersBnB < Sinatra::Base
 
   post '/listing/create' do
     Listing.create(
-      title: params[:title],
+      name: params[:title],
       description: params[:description],
       price: params[:price],
       location: params[:location],
-      date: params[:date],
-      user_id: session[:user].id
+      available_date: params[:date],
+      user_id: session[:user_id]
     )
     redirect '/'
-  end
-
-  get '/view' do
-    @page = erb(:complete_listing)
-    erb(:template)
   end
 
   get '/listing/new' do
     @page = erb(:add_listing)
     erb(:template)
+  end
 
+  get '/listing/:id' do
+    @listing = Listing.find_by(id: params[:id])
+    @user = User.find_by(id: @listing.user_id)
+    @page = erb(:complete_listing)
+    erb(:template)
   end
 
   # Sign Up

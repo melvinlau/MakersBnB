@@ -14,14 +14,12 @@
      <%@feed.each do |listing|%>
 
         <div class="peep m-3 p-4" id="peep">
-          <a href="/view" id="fill-div">
-            Listing Title
+          <div>
+            <a class="author mb-2" href="/listing/<%= listing.id %>" id="fill-div">
+                <strong> <%= listing.name %> </strong>
             </a>
-          <div class="author mb-2">
-            <strong> listing.user.name</strong>
           </div>
-
-          <div class="listing-content mb-3"> listing.content</div>
+          <div class="listing-content mb-3"> Price: <b>£<%= listing.price.floor %> per night</b> </div>
         </div>
 
        <%end%>
@@ -39,12 +37,17 @@
   </div>
 
   <!-- Sidebar -->
-  <div>
+  <div class="col-4 pr-3 py-2">
+
 
     <% if @user %>
     <div class="user-dashboard my-2">
         <div class="greeting mb-3">
           <h2><strong> Hello, <%= @user.name %> </strong></h2>
+          <br>
+          <form action="/listing/new">
+            <input class="btn btn-dark" type="submit" value="New Listing">
+          </form>
           <div class="float-right">
             <form action="/users/<%= @user.id %>/session/destroy" method="post">
               <input class="btn btn-dark btn-sm" type="submit" value="Sign Out">
