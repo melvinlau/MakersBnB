@@ -40,9 +40,6 @@
 
   <!-- Sidebar -->
   <div class="col-4 pr-3 py-2">
-  <form action="/listing/new">
-    <input class="btn btn-dark" type="submit" value="New Listing">
-  </form>
 
     <% if @user_id %>
 
@@ -53,7 +50,7 @@
           </div>
         </div>
         <div class="add-listing mt-5">
-        <form action="new-listing" method="get">
+        <form action="/listing/new" method="get">
             <input class="btn btn-dark mt-3" type="submit" value="New Listing, who dis?">
           </form>
           <form action="/users/<%= session[:user_id] %>/session/destroy" method = "post">
