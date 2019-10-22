@@ -85,11 +85,11 @@ class MakersBnB < Sinatra::Base
     redirect '/'
   end
 
-  # # Delete a peep
-  # post '/peeps/:id/delete' do
-  #   Peep.delete(id: params[:peep_id])
-  #   redirect '/'
-  # end
+  # Delete a listing
+  post '/listing/:id/delete' do
+    Listing.delete(id: params[:listing_id])
+    redirect '/'
+  end
 
   run! if app_file == $0
 
