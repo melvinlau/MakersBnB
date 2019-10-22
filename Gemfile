@@ -9,6 +9,7 @@ gem 'sinatra'
 gem 'sinatra-flash'
 gem 'sinatra-activerecord'
 gem 'activerecord'
+gem 'activemodel'
 
 group :test do
   gem 'capybara'

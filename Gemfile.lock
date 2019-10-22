@@ -105,6 +105,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  activemodel
   activerecord
   bcrypt
   capybara

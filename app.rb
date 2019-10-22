@@ -4,7 +4,6 @@ require 'sinatra/flash'
 require 'sinatra/activerecord'
 require 'bcrypt'
 
-
 require './lib/user'
 require './lib/listing'
 
@@ -25,12 +24,12 @@ class MakersBnB < Sinatra::Base
 
   post '/listing/create' do
     Listing.create(
-      title: params[:title],
+      name: params[:name],
       description: params[:description],
       price: params[:price],
       location: params[:location],
-      date: params[:date],
-      user_id: session[:user].id
+      available_date: params[:available_date],
+      user_id: session[:user_id]
     )
     redirect '/'
   end
@@ -53,9 +52,10 @@ class MakersBnB < Sinatra::Base
       password: params[:password],
       name: params[:name]
     )
-    session[:user] = User.new(email: user["email"], name: user["name"], password: user["password"], id: user["id"])
-    p user
+    session[:user_id] = user.id
     p session
+
+    # session[:user] = User.new(email: user["email"], name: user["name"], password: user["password"], id: user["id"])
     # if user == 'Email exists'
     #   flash[:notice] = 'An account already exists with this email address. Please use another.'
     # else
@@ -66,15 +66,17 @@ class MakersBnB < Sinatra::Base
 
   # Sign In
   post '/users/session' do
-    user = User.authenticate(
-      email: params[:email],
-      password: params[:password]
-    )
-    if user
-      session[:user] = user
-    else
-      flash[:notice] = 'Please check your email or password.'
-    end
+    session[:user_id] = User.authenticate(email: params[:email], password: params[:password])
+
+    p session
+    # existing_user = User.find_by(email: params[:email])
+    # authenticated_user = user.authenticate('yas')
+    # p "authenticated #{authenticated_user}"
+    # if authenticated_user
+    #   session[:user] = authenticated_user
+    # else
+    #   flash[:notice] = 'Please check your email or password.'
+    # end
     redirect '/'
   end
 
