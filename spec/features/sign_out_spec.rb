@@ -8,7 +8,7 @@ feature 'Sign out' do
   scenario 'A logged in user can sign out' do
     User.create(
       email: email,
-      password: password,
+      password: BCrypt::Password.create(password),
       name: name
     )
     visit '/'

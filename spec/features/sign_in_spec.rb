@@ -9,7 +9,7 @@ feature 'Sign in' do
     # Create a test user account in the database
     User.create(
       email: email,
-      password: password,
+      password: BCrypt::Password.create(password),
       name: name
     )
   end

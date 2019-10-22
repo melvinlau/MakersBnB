@@ -51,9 +51,10 @@ class MakersBnB < Sinatra::Base
     if User.find_by(email: params[:email])
       flash[:notice] = 'An account already exists with this email address. Please use another.'
     else
+      encrypted_password = BCrypt::Password.create(params[:password])
       user = User.create(
         email: params[:email],
-        password: params[:password],
+        password: encrypted_password,
         name: params[:name]
       )
       session[:user_id] = user.id
