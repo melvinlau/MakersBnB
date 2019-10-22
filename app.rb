@@ -24,18 +24,13 @@ class MakersBnB < Sinatra::Base
   end
 
   post '/listing/create' do
-    Listing.create(
+       Listing.create(
       name: params[:name],
       description: params[:description],
       price: params[:price],
       location: params[:location],
       available_date: params[:available_date],
-      user_id: 
-      if session[:user_id] === nil
-        fail "Incorrect password"
-      else
-        session[:user_id]
-      end
+      user_id: session[:user_id]
     )
     redirect '/'
   end

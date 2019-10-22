@@ -15,13 +15,13 @@
 
         <div class="peep m-3 p-4" id="peep">
           <a href="/view" id="fill-div">
-            Listing Title
+            <%=listing.name%>
             </a>
           <div class="author mb-2">
-            <strong> listing.user.name</strong>
+            <strong> <%=listing.name%></strong>
           </div>
 
-          <div class="listing-content mb-3"> listing.content</div>
+          <div class="listing-content mb-3"> <%=listing.description%></div>
         </div>
 
        <%end%>
