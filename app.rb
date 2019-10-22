@@ -1,7 +1,6 @@
 require 'sinatra/base'
 require 'sinatra/flash'
 require 'pg'
-require 'bcrypt'
 
 # require './datamapper_setup'
 
@@ -23,8 +22,31 @@ class Chitter < Sinatra::Base
   # Index Page
   get '/' do
     @user = session[:user]
-    @feed = Peep.all
+    # @feed = Peep.all
     @page = erb(:index)
+    erb(:template)
+  end
+
+  post '/create' do
+    Listing.create(
+      title: params[:title],
+      description: params[:description],
+      price: params[:price],
+      location: params[:location],
+      date: params[:date],
+      user_id: session[:user].id
+    )
+    p params
+    redirect '/'
+  end
+
+  get '/view' do
+    @page = erb(:complete_listing)
+    erb(:template)
+  end
+
+  get '/new-listing' do
+    @page = erb(:add_listing)
     erb(:template)
   end
 
@@ -67,25 +89,11 @@ class Chitter < Sinatra::Base
     redirect '/'
   end
 
-  # Post a new peep
-  post '/peeps/new' do
-
-    if params[:content].length > 0
-      Peep.create(
-        content: params[:content],
-        user_id: session[:user].id
-      )
-    else
-      flash[:notice] = 'You just tried to submit an empty post!'
-    end
-    redirect '/'
-  end
-
-  # Delete a peep
-  post '/peeps/:id/delete' do
-    Peep.delete(id: params[:peep_id])
-    redirect '/'
-  end
+  # # Delete a peep
+  # post '/peeps/:id/delete' do
+  #   Peep.delete(id: params[:peep_id])
+  #   redirect '/'
+  # end
 
   run! if app_file == $0
 

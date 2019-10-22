@@ -4,13 +4,12 @@ class Peep
     escaped_content = content.gsub("'", "''")
     sql = "INSERT INTO peeps (content, user_id) "
     sql += "VALUES('#{escaped_content}', '#{user_id}') "
-    sql += "RETURNING id, content, timestamp, user_id"
+    sql += "RETURNING id, content, user_id"
     result = DBConnection.query(sql)
 
     Peep.new(
       id: result[0]['id'],
       content: result[0]['content'],
-      timestamp: result[0]['timestamp'],
       user_id: result[0]['user_id']
     )
   end
@@ -21,7 +20,6 @@ class Peep
       Peep.new(
         id: peep['id'],
         content: peep['content'],
-        timestamp: peep['timestamp'],
         user_id: peep['user_id']
       )
     end
@@ -31,12 +29,11 @@ class Peep
     DBConnection.query("DELETE FROM peeps WHERE id = #{id}")
   end
 
-  attr_reader :id, :content, :timestamp, :user_id, :user
+  attr_reader :id, :content, :user_id, :user
 
-  def initialize(id:, content:, timestamp:, user_id:)
+  def initialize(id:, content:, user_id:)
     @id = id
     @content = content
-    @timestamp = timestamp[0..15]
     @user_id = user_id
     @user = User.find(by: 'id', term: user_id)
   end
