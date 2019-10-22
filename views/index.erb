@@ -44,13 +44,13 @@
     <input class="btn btn-dark" type="submit" value="New Listing">
   </form>
 
-    <% if @user %>
+    <% if @user_id %>
 
       <div class="user-dashboard my-2">
         <div class="greeting mb-3">
-          <h2><strong>@user.name</strong></h2>
+          <h2><strong><%=@user_name%></strong></h2>
           <div class="float-right">
-            <form action="/users/<%= @user.id %>/session/destroy" method="post">
+            <form action="/users/<%= @user_id %>/session/destroy" method="post">
               <input class="btn btn-dark btn-sm" type="submit" value="Sign Out">
             </form>
           </div>
@@ -58,6 +58,9 @@
         <div class="add-listing mt-5">
         <form action="new-listing" method="get">
             <input class="btn btn-dark mt-3" type="submit" value="New Listing, who dis?">
+          </form>
+          <form action="/users/<%= session[:user_id] %>/session/destroy" method = "post">
+          <input type="submit" value="Sign Out">
           </form>
         </div>
       </div>

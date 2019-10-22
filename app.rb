@@ -16,7 +16,8 @@ class MakersBnB < Sinatra::Base
 
   # Index Page
   get '/' do
-    @user = session[:user]
+    @user_id = session[:user_id]
+    @user_name = session[:user_name]
     @feed = Listing.all
     @page = erb(:index)
     erb(:template)
@@ -29,7 +30,12 @@ class MakersBnB < Sinatra::Base
       price: params[:price],
       location: params[:location],
       available_date: params[:available_date],
-      user_id: session[:user_id]
+      user_id: 
+      if session[:user_id] === nil
+        fail "Incorrect password"
+      else
+        session[:user_id]
+      end
     )
     redirect '/'
   end
@@ -53,6 +59,7 @@ class MakersBnB < Sinatra::Base
       name: params[:name]
     )
     session[:user_id] = user.id
+    session[:user_name] = user.name
     p session
 
     # session[:user] = User.new(email: user["email"], name: user["name"], password: user["password"], id: user["id"])
@@ -66,7 +73,9 @@ class MakersBnB < Sinatra::Base
 
   # Sign In
   post '/users/session' do
-    session[:user_id] = User.authenticate(email: params[:email], password: params[:password])
+    user = User.authenticate(email: params[:email], password: params[:password])
+    session[:user_id] = user[:user_id]
+    session[:user_name] = user[:user_name]
 
     p session
     # existing_user = User.find_by(email: params[:email])
