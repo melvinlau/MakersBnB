@@ -9,9 +9,9 @@
   <!-- Main -->
   <div class="feed col-8 pl-3 py-2">
 
-    if @feed.length > 0 
+    if @feed.length > 0
 
-     @feed.each do |peep| 
+     @feed.each do |peep|
 
         <div class="peep m-3 p-4" id="peep">
           <a href="/view" id="fill-div">
@@ -24,8 +24,8 @@
 
           <div class="peep-content mb-3"> peep.content</div>
         </div>
-        
-       end 
+
+       end
 
     else
 
@@ -41,6 +41,9 @@
 
   <!-- Sidebar -->
   <div class="col-4 pr-3 py-2">
+  <form action="/new-listing">
+    <input class="btn btn-dark" type="submit" value="New Listing">
+  </form>
 
     <% if @user %>
 
@@ -73,7 +76,7 @@
       </div>
 
       <div class="flash-notice my-5">
-  
+
       </div>
 
       <div class="sign-up my-2">

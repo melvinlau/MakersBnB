@@ -1,12 +1,12 @@
-<input type="button" value="Back" onclick="history.back()">
+<input class="btn btn-dark" type="button" value="Back" onclick="history.back()">
 
-<h2> @listing.title </h2>
-<h4> Hosted by: @user.username </h4>
+<h2 class="mb-3"> @listing.title </h2>
+<h4 class="mb-3"> Hosted by: @user.username </h4>
 
-<div>
-  Description: @listing.description 
+<div class="sign-in my-2">
+  Description: @listing.description
 <br>
-  Price per night: @listing.price 
+  Price per night: @listing.price
 <br>
   Location: @listing.location
 <br>

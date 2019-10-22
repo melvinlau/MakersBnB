@@ -22,12 +22,12 @@ class Chitter < Sinatra::Base
   # Index Page
   get '/' do
     @user = session[:user]
-    @feed = Peep.all
+    # @feed = Peep.all
     @page = erb(:index)
     erb(:template)
   end
 
-  post '/create' do 
+  post '/create' do
     Listing.create(
       title: params[:title],
       description: params[:description],
@@ -38,12 +38,12 @@ class Chitter < Sinatra::Base
     )
     p params
     redirect '/'
-  end 
+  end
 
-  get '/view' do 
+  get '/view' do
     @page = erb(:complete_listing)
     erb(:template)
-  end 
+  end
 
   get '/new-listing' do
     @page = erb(:add_listing)
