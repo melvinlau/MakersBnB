@@ -16,8 +16,7 @@ class MakersBnB < Sinatra::Base
 
   # Index Page
   get '/' do
-    @user_id = session[:user_id]
-    @user_name = session[:user_name]
+    @user = User.find_by(id: session[:user_id]) || nil
     @feed = Listing.all
     @page = erb(:index)
     erb(:template)
@@ -35,15 +34,16 @@ class MakersBnB < Sinatra::Base
     redirect '/'
   end
 
-  get '/view' do
-    @page = erb(:complete_listing)
-    erb(:template)
-  end
-
   get '/listing/new' do
     @page = erb(:add_listing)
     erb(:template)
+  end
 
+  get '/listing/:id' do
+    @listing = Listing.find_by(id: params[:id])
+    @host_user = User.find_by(id: @listing.user_id)
+    @page = erb(:complete_listing)
+    erb(:template)
   end
 
   # Sign Up
@@ -55,14 +55,6 @@ class MakersBnB < Sinatra::Base
     )
     session[:user_id] = user.id
     session[:user_name] = user.name
-    p session
-
-    # session[:user] = User.new(email: user["email"], name: user["name"], password: user["password"], id: user["id"])
-    # if user == 'Email exists'
-    #   flash[:notice] = 'An account already exists with this email address. Please use another.'
-    # else
-    #   session[:user] = user
-    # end
     redirect '/'
   end
 
@@ -71,16 +63,6 @@ class MakersBnB < Sinatra::Base
     user = User.authenticate(email: params[:email], password: params[:password])
     session[:user_id] = user[:user_id]
     session[:user_name] = user[:user_name]
-
-    p session
-    # existing_user = User.find_by(email: params[:email])
-    # authenticated_user = user.authenticate('yas')
-    # p "authenticated #{authenticated_user}"
-    # if authenticated_user
-    #   session[:user] = authenticated_user
-    # else
-    #   flash[:notice] = 'Please check your email or password.'
-    # end
     redirect '/'
   end
 
