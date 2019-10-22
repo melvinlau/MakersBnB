@@ -18,12 +18,12 @@ class MakersBnB < Sinatra::Base
   # Index Page
   get '/' do
     @user = session[:user]
-    # @feed = Peep.all
+    @feed = Listing.all
     @page = erb(:index)
     erb(:template)
   end
 
-  post '/create' do
+  post '/listing/create' do
     Listing.create(
       title: params[:title],
       description: params[:description],
@@ -32,7 +32,6 @@ class MakersBnB < Sinatra::Base
       date: params[:date],
       user_id: session[:user].id
     )
-    p params
     redirect '/'
   end
 
@@ -41,9 +40,10 @@ class MakersBnB < Sinatra::Base
     erb(:template)
   end
 
-  get '/new-listing' do
+  get '/listing/new' do
     @page = erb(:add_listing)
     erb(:template)
+
   end
 
   # Sign Up
@@ -51,16 +51,16 @@ class MakersBnB < Sinatra::Base
     user = User.create(
       email: params[:email],
       password: params[:password],
-      name: params[:name],
-      username: params[:username]
+      name: params[:name]
     )
-    if user == 'Email exists'
-      flash[:notice] = 'An account already exists with this email address. Please use another.'
-    elsif user == 'Username exists'
-      flash[:notice] = 'An account already exists with this username. Please choose another.'
-    else
-      session[:user] = user
-    end
+    session[:user] = User.new(email: user["email"], name: user["name"], password: user["password"], id: user["id"])
+    p user
+    p session
+    # if user == 'Email exists'
+    #   flash[:notice] = 'An account already exists with this email address. Please use another.'
+    # else
+    #   session[:user] = user
+    # end
     redirect '/'
   end
 

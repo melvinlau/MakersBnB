@@ -9,39 +9,38 @@
   <!-- Main -->
   <div class="feed col-8 pl-3 py-2">
 
-    if @feed.length > 0
+    <%if @feed.length > 0%>
 
-     @feed.each do |peep|
+     <%@feed.each do |listing|%>
 
         <div class="peep m-3 p-4" id="peep">
           <a href="/view" id="fill-div">
             Listing Title
             </a>
           <div class="author mb-2">
-            <strong> peep.user.name</strong>
-            <span class="handle ml-2">@peep.user.username</span>
+            <strong> listing.user.name</strong>
           </div>
 
-          <div class="peep-content mb-3"> peep.content</div>
+          <div class="listing-content mb-3"> listing.content</div>
         </div>
 
-       end
+       <%end%>
 
-    else
+    <%else%>
 
-      <div class="peep m-3 p-4">
-        <div class="peep-empty">
+      <div class="listing m-3 p-4">
+        <div class="listing-empty">
           No listings exist. You can get a hotel, cheapskate!
         </div>
       </div>
 
-    end
+    <%end%>
 
   </div>
 
   <!-- Sidebar -->
   <div class="col-4 pr-3 py-2">
-  <form action="/new-listing">
+  <form action="/listing/new">
     <input class="btn btn-dark" type="submit" value="New Listing">
   </form>
 
@@ -55,10 +54,9 @@
               <input class="btn btn-dark btn-sm" type="submit" value="Sign Out">
             </form>
           </div>
-          <h4>@ @user.username</h4>
         </div>
-        <div class="add-peep mt-5">
-        <form action="/listing/new" method="get">
+        <div class="add-listing mt-5">
+        <form action="new-listing" method="get">
             <input class="btn btn-dark mt-3" type="submit" value="New Listing, who dis?">
           </form>
         </div>
@@ -85,7 +83,6 @@
           <input type="text" name="email" placeholder="Email address" required> <br>
           <input type="password" name="password" placeholder="Password" required> <br>
           <input type="text" name="name" placeholder="Name" required> <br>
-          <input type="text" name="username" placeholder="Username" required> <br>
           <input class="btn btn-dark" type="submit" value="Sign Up">
         </form>
       </div>

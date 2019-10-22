@@ -1,16 +1,16 @@
 <input class="btn btn-dark" type="button" value="Back" onclick="history.back()">
 
-<h2 class="mb-3"> @listing.title </h2>
-<h4 class="mb-3"> Hosted by: @user.username </h4>
+<h2 class="mb-3"> <%=@listing.title%> </h2>
+<h4 class="mb-3"> Hosted by: <%=@user.username%> </h4>
 
 <div class="sign-in my-2">
-  Description: @listing.description
+  Description:<%= @listing.description%>
 <br>
-  Price per night: @listing.price
+  Price per night: <%=@listing.price%>
 <br>
-  Location: @listing.location
+  Location: <%=@listing.location%>
 <br>
-  Availabilty: @listing.date
+  Availabilty: <%=@listing.date%>
 </div>
 
 <% if @user && @user.id == peep.user.id %>
