@@ -1,20 +1,22 @@
-
 <br>
 <input class="btn btn-dark" type="button" value="Back" onclick="history.back()">
 <br>
 <div class="sign-in my-2">
-<form action ='/listing/create' method="post">
- <input type="text" name="name" id="name" placeholder="Title" required>
- <br>
-  <input type="text" name="description" id="description" placeholder="Property Description" required>
-  <br>
-   <input type="text" name="price" id="price" placeholder="Price Per Night" required>
-   <br>
+  <form action="/listing/create" method="post" enctype="multipart/form-data">
+    <input type="text" name="name" id="name" placeholder="Title" required>
+    <br>
+    <input type="text" name="description" id="description" placeholder="Property Description" required>
+    <br>
+    <input type="text" name="price" id="price" placeholder="Price Per Night" required>
+    <br>
     <input type="text" name="location" id="location" placeholder="Property Location" required>
     <br>
-    <%# <input type="text" name="images" placeholder="Property Image" required> %>
-     <input class="sign-in my-2" type="date" name="available_date" id="available_date" placeholder="Dates Available" required>
-     <br>
-     <input class="btn btn-dark" type="submit" name="submit" id='submit' value="Submit Listing">
-</form>
+
+    <input type="file" name="image" class="form-control" required>
+
+    <input class="sign-in my-2" type="date" name="available_date" id="available_date" placeholder="Dates Available" required>
+    <br>
+    <input class="btn btn-dark" type="submit" name="submit" id='submit' value="Submit Listing">
+  </form>
+
 </div>

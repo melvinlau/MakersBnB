@@ -3,9 +3,20 @@ require 'sinatra/base'
 require 'sinatra/flash'
 require 'sinatra/activerecord'
 require 'bcrypt'
+require 'carrierwave'
+require 'carrierwave/orm/activerecord'
+require 'minimagick'
 
 require './lib/user'
 require './lib/listing'
+require './lib/booking'
+require './lib/uploader'
+require './lib/image'
+
+# Configure Carrierwave
+CarrierWave.configure do |config|
+  config.root = File.dirname(__FILE__) + "/static/media"
+end
 
 class MakersBnB < Sinatra::Base
   set :database_file, 'config/database.yml'
@@ -18,12 +29,14 @@ class MakersBnB < Sinatra::Base
   get '/' do
     @user = User.find_by(id: session[:user_id]) || nil
     @feed = Listing.all
+
     @page = erb(:index)
     erb(:template)
   end
 
   post '/listing/create' do
-       Listing.create(
+
+    listing = Listing.create(
       name: params[:name],
       description: params[:description],
       price: params[:price],
@@ -31,6 +44,12 @@ class MakersBnB < Sinatra::Base
       available_date: params[:available_date],
       user_id: session[:user_id]
     )
+
+    img = Image.new
+    img.image = params[:image]
+    img.listing_id = listing.id
+    img.save!
+
     redirect '/'
   end
 
@@ -42,6 +61,7 @@ class MakersBnB < Sinatra::Base
   get '/listing/:id' do
     @listing = Listing.find_by(id: params[:id])
     @host_user = User.find_by(id: @listing.user_id)
+    @image = Image.find_by(id: @listing.id)
     @page = erb(:complete_listing)
     erb(:template)
   end

@@ -2,7 +2,7 @@
 
 <h2 class="mb-3"> <%= @listing.name %> </h2>
 <h4 class="mb-3"> Hosted by: <%= @host_user.name %> </h4>
-
+<img src="../media<%=@image.image.url %>" class="listing-image" width="700">
 <div class="sign-in my-2">
   Description: <%= @listing.description %>
 <br>
