@@ -1,0 +1,24 @@
+<style>
+  form { display: inline; }
+</style>
+
+<form action="/">
+  <input class="btn btn-dark" type="submit" value="Back">
+</form>
+<br>
+<br>
+<% if @bookings.length > 0 %>
+  <% @bookings.each do |bk| %>
+    <p>
+      You are staying at <%= bk[:listing_name] %>, <%= bk[:location] %> on <%= bk[:requested_date].strftime("%a %e %b %Y") %>
+      <form action="/listing/<%= bk[:ls_id] %>">
+        <input class="btn btn-dark btn-sm" type="submit" value="View Property">
+      </form>
+      <form action="/booking/<%= bk[:bk_id] %>" method="post">
+        <input type="hidden" name="_method" value="DELETE">
+        <input class="btn btn-dark btn-sm" type="submit" value="Cancel">
+      </form>
+      <br>
+    <p>
+  <% end %>
+<% end %>
