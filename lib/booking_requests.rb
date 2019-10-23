@@ -5,7 +5,7 @@ class BookingRequest < ActiveRecord::Base
   belongs_to :user
   has_many :listings
 
-  def self.get_user_bookings(user_id:)
+  def self.get_user_requests(user_id:)
     booking_requests = BookingRequest.where(user_id: user_id)
     requests = []
     booking_requests.each { |br|
@@ -17,5 +17,15 @@ class BookingRequest < ActiveRecord::Base
       })
     }
     requests
+  end
+
+  def self.confirm(id:)
+    br = BookingRequest.find_by(id: id)
+    Booking.create(
+      user_id: br.guest,
+      requested_date: br.requested_date,
+      listing_id: br.listing_id
+    )
+    BookingRequest.delete(br.id)
   end
 end

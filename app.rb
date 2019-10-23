@@ -55,13 +55,18 @@ class MakersBnB < Sinatra::Base
     redirect '/'
   end
 
+  delete '/booking/:id' do
+    Booking.delete(params[:id])
+    redirect '/bookings'
+  end
+
   delete '/booking-request/:id' do
     BookingRequest.delete(params[:id])
     redirect '/requests'
   end
 
   get '/requests' do
-    @requests = BookingRequest.get_user_bookings(user_id: session[:user_id])
+    @requests = BookingRequest.get_user_requests(user_id: session[:user_id])
     erb :booking_request_list
   end
 
@@ -77,17 +82,9 @@ class MakersBnB < Sinatra::Base
   end
 
   post '/booking/new' do
-    br = BookingRequest.find_by(id: params[:br_id])
-    Booking.create(
-      user_id: br.guest,
-      requested_date: br.requested_date,
-      listing_id: br.listing_id
-    )
-    BookingRequest.delete(br.id)
+    BookingRequest.confirm(id: params[:br_id])
     redirect '/requests'
   end
-
-
 
   # Sign Up
   post '/users/new' do
@@ -122,6 +119,13 @@ class MakersBnB < Sinatra::Base
     Listing.delete(id: params[:listing_id])
     redirect '/'
   end
+
+  get '/bookings' do
+    @bookings = Booking.get_user_bookings(user_id: session[:user_id])
+    erb :bookings_list
+  end
+
+
 
 
 
