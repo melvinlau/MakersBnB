@@ -15,7 +15,7 @@ require './lib/image'
 
 # Configure Carrierwave
 CarrierWave.configure do |config|
-  config.root = File.dirname(__FILE__) + "/media"
+  config.root = File.dirname(__FILE__) + "/public"
 end
 
 class MakersBnB < Sinatra::Base
@@ -61,6 +61,7 @@ class MakersBnB < Sinatra::Base
   get '/listing/:id' do
     @listing = Listing.find_by(id: params[:id])
     @host_user = User.find_by(id: @listing.user_id)
+    @image = Image.find_by(id: @listing.id)
     @page = erb(:complete_listing)
     erb(:template)
   end
