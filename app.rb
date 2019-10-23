@@ -5,7 +5,7 @@ require 'sinatra/activerecord'
 require 'bcrypt'
 require 'carrierwave'
 require 'carrierwave/orm/activerecord'
-# require 'rmagick'
+require 'minimagick'
 
 require './lib/user'
 require './lib/listing'
@@ -15,7 +15,7 @@ require './lib/image'
 
 # Configure Carrierwave
 CarrierWave.configure do |config|
-  config.root = File.dirname(__FILE__) + "static/media"
+  config.root = File.dirname(__FILE__) + "/static/media"
 end
 
 class MakersBnB < Sinatra::Base
@@ -47,7 +47,7 @@ class MakersBnB < Sinatra::Base
 
     img = Image.new
     img.image = params[:image]
-    img.listing_id = listing.id 
+    img.listing_id = listing.id
     img.save!
 
     redirect '/'

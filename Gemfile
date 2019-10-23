@@ -10,7 +10,7 @@ gem 'sinatra-flash'
 gem 'sinatra-activerecord'
 gem 'activerecord'
 gem 'carrierwave'
-# gem 'rmagick'
+gem 'mini_magick'
 
 
 group :test do
