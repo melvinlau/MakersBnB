@@ -7,6 +7,7 @@ require 'bcrypt'
 require './lib/user'
 require './lib/listing'
 require './lib/booking_requests'
+require './lib/booking'
 
 
 class MakersBnB < Sinatra::Base
@@ -74,6 +75,19 @@ class MakersBnB < Sinatra::Base
     )
     redirect '/'
   end
+
+  post '/booking/new' do
+    br = BookingRequest.find_by(id: params[:br_id])
+    Booking.create(
+      user_id: br.guest,
+      requested_date: br.requested_date,
+      listing_id: br.listing_id
+    )
+    BookingRequest.delete(br.id)
+    redirect '/requests'
+  end
+
+
 
   # Sign Up
   post '/users/new' do
