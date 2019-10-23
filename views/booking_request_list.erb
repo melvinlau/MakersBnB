@@ -1,1 +1,22 @@
-Gahhhhhhhhhh
+<style>
+  form { display: inline; }
+</style>
+
+<input class="btn btn-dark" type="button" value="Back" onclick="history.back()">
+<br>
+<br>
+<% if @requests.length > 0 %>
+  <% @requests.each do |req| %>
+    <%= req[:guest] %> would like to book <%= req[:listing_name] %> on <%= req[:requested_date].strftime("%a %e %b %Y") %>
+    <form action="/booking/new" method="post">
+      <input type="hidden" name="br_id" value=<%=req[:br_id]%> >
+      <input class="btn btn-dark btn-sm" type="submit" value="Approve">
+    </form>
+    <form action="/booking-request/<%= req[:br_id] %>" method="post">
+      <input type="hidden" name="_method" value="DELETE">
+      <input class="btn btn-dark btn-sm" type="submit" value="Reject">
+    </form>
+    <br>
+    <br>
+  <% end %>
+<% end %>
