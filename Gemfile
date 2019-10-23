@@ -9,7 +9,9 @@ gem 'sinatra'
 gem 'sinatra-flash'
 gem 'sinatra-activerecord'
 gem 'activerecord'
-gem 'activemodel'
+gem 'carrierwave'
+# gem 'rmagick'
+
 
 group :test do
   gem 'capybara'

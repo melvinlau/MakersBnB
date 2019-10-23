@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_22_091030) do
+ActiveRecord::Schema.define(version: 2019_10_23_104015) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,6 +22,12 @@ ActiveRecord::Schema.define(version: 2019_10_22_091030) do
     t.index ["user_id"], name: "index_bookings_on_user_id"
   end
 
+  create_table "images", force: :cascade do |t|
+    t.bigint "listing_id"
+    t.string "image"
+    t.index ["listing_id"], name: "index_images_on_listing_id"
+  end
+
   create_table "listings", force: :cascade do |t|
     t.string "name"
     t.string "description"
@@ -30,6 +36,10 @@ ActiveRecord::Schema.define(version: 2019_10_22_091030) do
     t.string "photo_src"
     t.datetime "available_date"
     t.integer "user_id"
+  end
+
+  create_table "uploads", force: :cascade do |t|
+    t.string "file"
   end
 
   create_table "users", force: :cascade do |t|
