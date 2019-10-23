@@ -15,7 +15,7 @@ require './lib/image'
 
 # Configure Carrierwave
 CarrierWave.configure do |config|
-  config.root = File.dirname(__FILE__) + "/public"
+  config.root = File.dirname(__FILE__) + "static/media"
 end
 
 class MakersBnB < Sinatra::Base
