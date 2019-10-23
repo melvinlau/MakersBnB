@@ -124,6 +124,7 @@ DEPENDENCIES
   bcrypt
   capybara
   carrierwave
+  mini_magick
   pg
   rake
   rspec

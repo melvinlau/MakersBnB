@@ -5,12 +5,12 @@ require 'sinatra/activerecord'
 require 'bcrypt'
 require 'carrierwave'
 require 'carrierwave/orm/activerecord'
-require 'minimagick'
+# require 'minimagick'
 
 require './lib/user'
 require './lib/listing'
-<<<<<<< HEAD
 require './lib/booking'
+require './lib/booking_requests'
 require './lib/uploader'
 require './lib/image'
 
@@ -18,11 +18,6 @@ require './lib/image'
 CarrierWave.configure do |config|
   config.root = File.dirname(__FILE__) + "/static/media"
 end
-=======
-require './lib/booking_requests'
-require './lib/booking'
-
->>>>>>> b6d33b8609c06e7705d307e277d1c84504a17d5b
 
 class MakersBnB < Sinatra::Base
   set :database_file, 'config/database.yml'
@@ -41,12 +36,8 @@ class MakersBnB < Sinatra::Base
   end
 
   post '/listing/create' do
-<<<<<<< HEAD
 
     listing = Listing.create(
-=======
-      Listing.create(
->>>>>>> b6d33b8609c06e7705d307e277d1c84504a17d5b
       name: params[:name],
       description: params[:description],
       price: params[:price],
@@ -71,11 +62,8 @@ class MakersBnB < Sinatra::Base
   get '/listing/:id' do
     @listing = Listing.find_by(id: params[:id])
     @host_user = User.find_by(id: @listing.user_id)
-<<<<<<< HEAD
+    @user = User.find_by(id: session[:user_id]) 
     @image = Image.find_by(id: @listing.id)
-=======
-    @user = User.find_by(id: session[:user_id])
->>>>>>> b6d33b8609c06e7705d307e277d1c84504a17d5b
     @page = erb(:complete_listing)
     erb(:template)
   end
@@ -97,7 +85,8 @@ class MakersBnB < Sinatra::Base
 
   get '/requests' do
     @requests = BookingRequest.get_user_requests(user_id: session[:user_id])
-    erb :booking_request_list
+    @page = erb(:booking_request_list)
+    erb(:template)
   end
 
   post '/booking-request/new' do
@@ -163,7 +152,8 @@ class MakersBnB < Sinatra::Base
 
   get '/bookings' do
     @bookings = Booking.get_user_bookings(user_id: session[:user_id])
-    erb :bookings_list
+    @page = erb(:bookings_list)
+    erb(:template)
   end
 
 
