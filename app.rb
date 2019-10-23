@@ -54,7 +54,12 @@ class MakersBnB < Sinatra::Base
     redirect '/'
   end
 
-  post '/requests' do
+  delete '/booking-request/:id' do
+    BookingRequest.delete(params[:id])
+    redirect '/requests'
+  end
+
+  get '/requests' do
     @requests = BookingRequest.get_user_bookings(user_id: session[:user_id])
     erb :booking_request_list
   end
@@ -98,10 +103,13 @@ class MakersBnB < Sinatra::Base
   end
 
   # Delete a listing
+  # duplicate? Is this needed?
   post '/listing/:id/delete' do
     Listing.delete(id: params[:listing_id])
     redirect '/'
   end
+
+
 
   run! if app_file == $0
 
