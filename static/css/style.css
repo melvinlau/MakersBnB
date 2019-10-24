@@ -69,6 +69,14 @@ h4 {
 .listing-thumb {
 }
 
+.flash-notice {
+  background-color: #F31431;
+  border: solid 1px #ffe7e7;
+  color: #FFE7E7;
+  padding: 10px;
+  border-radius: 5px;
+}
+
 .sign-up input[type="text"],
 .sign-up input[type="password"],
 .sign-in input[type="text"],

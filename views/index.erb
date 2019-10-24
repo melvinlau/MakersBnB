@@ -6,9 +6,9 @@
     <% if @feed.length > 0 %> <!-- If there is at least one listing -->
 
       <% @feed.each do |listing| %>
-        <div class="listing row m-3 p-4" id="listing-<%= listing.id %>">
+        <div class="listing row m-3" id="listing-<%= listing.id %>">
 
-          <div class="col-8">
+          <div class="col-8 p-4">
             <div class ="listing-name">
               <a class="mb-2" href="/listing/<%= listing.id %>">
                 <strong> <%= listing.name %> </strong>
@@ -23,10 +23,6 @@
               <img src='/media<%= "#{listing.photo_src.url}".gsub("/uploads/", "/uploads/thumb_") %>' class="listing-thumb">
             </div>
           </div>
-
-
-
-
 
         </div>
       <% end %>
@@ -76,7 +72,7 @@
 
     <% else %> <!-- If a user is not signed in -->
 
-      <div class="sign-in my-2">
+      <div class="sign-in mt-3 mb-5">
         <h5 class="mb-3"><strong>Sign in</strong> to your account</h5>
         <form action="/users/session" method="post">
           <input type="text" name="email" placeholder="Email" required>
@@ -85,9 +81,9 @@
         </form>
       </div>
 
-      <div class="flash-notice my-5">
-        <%= flash[:notice] %>
-      </div>
+      <% if flash[:notice] %>
+        <div class="flash-notice my-5"> <%= flash[:notice] %> </div>
+      <% end %>
 
       <div class="sign-up my-2">
         <h5 class="mb-3">Create a new account</h5>
