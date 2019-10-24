@@ -1,33 +1,27 @@
 <div class="row">
-  <div class="col-12 mt-3">
-    <h1>MakersBnb</h1>
-  </div>
-</div>
-
-<div class="row">
 
   <!-- Main -->
   <div class="feed col-8 pl-3 py-2">
 
-    <%if @feed.length > 0%>
+    <% if @feed.length > 0 %> <!-- If there is at least one listing -->
 
-     <%@feed.each do |listing|%>
-
-        <div class="peep m-3 p-4" id="peep">
-          <div>
-            <a class="author mb-2" href="/listing/<%= listing.id %>" id="fill-div">
-                <strong> <%= listing.name %> </strong>
+      <% @feed.each do |listing| %>
+        <div class="listing m-3 p-4" id="listing-<%= listing.id %>">
+          <div class ="listing-name">
+            <a class="mb-2" href="/listing/<%= listing.id %>">
+              <strong> <%= listing.name %> </strong>
             </a>
           </div>
           <div class="thumb">
             <img src='/media<%= "#{listing.photo_src.url}".gsub("/uploads/", "/uploads/thumb_") %>' class="listing-thumb">
           </div>
-          <div class="listing-content mb-3"> Price: <b>£<%= listing.price.floor %> per night</b> </div>
+          <div class="listing-price mb-3">
+            Price: <b>£<%= listing.price.floor %> per night</b>
+          </div>
         </div>
+      <% end %>
 
-       <%end%>
-
-    <%else%>
+    <%else%> <!-- If no listing exists -->
 
       <div class="listing m-3 p-4">
         <div class="listing-empty">
@@ -42,35 +36,35 @@
   <!-- Sidebar -->
   <div class="col-4 pr-3 py-2">
 
-
-    <% if @user %>
+    <% if @user %> <!-- If a user is signed in -->
     <div class="user-dashboard my-2">
-        <div class="greeting mb-3">
-          <h2><strong> Hello, <%= @user.name %> </strong></h2>
-          <br>
-          <form action="/listing/new">
-            <input class="btn btn-dark" type="submit" value="New Listing">
-          </form>
-           <br>
-          <form action="/requests">
-            <input class="btn btn-dark" type="submit" value="Booking Requests">
-          </form>
-          <br>
-          <form action="/bookings">
-            <input class="btn btn-dark" type="submit" value="Bookings">
-          </form>
-          <br>
-          <div class="float-right">
-          </div>
-        </div>
-        <div class="add-listing mt-5">
-          <form action="/users/<%= session[:user_id] %>/session/destroy" method = "post">
-          <input class="btn btn-dark btn-sm"  type="submit" value="Sign Out">
-          </form>
-        </div>
+
+      <div class="greeting mb-3">
+
+        <h2 class="mb-3"> <strong> Hello, <%= @user.name %> </strong> </h2>
+
+        <form action="/listing/new">
+          <input class="btn btn-dark mb-2" type="submit" value="New Listing">
+        </form>
+
+        <form action="/requests">
+          <input class="btn btn-dark mb-2" type="submit" value="Booking Requests">
+        </form>
+
+        <form action="/bookings">
+          <input class="btn btn-dark mb-2" type="submit" value="Bookings">
+        </form>
+
       </div>
 
-    <% else %>
+      <div class="add-listing mt-5">
+        <form action="/users/<%= session[:user_id] %>/session/destroy" method = "post">
+          <input class="btn btn-dark btn-sm"  type="submit" value="Sign Out">
+        </form>
+      </div>
+    </div>
+
+    <% else %> <!-- If a user is not signed in -->
 
       <div class="sign-in my-2">
         <h5 class="mb-3"><strong>Sign in</strong> to your account</h5>
