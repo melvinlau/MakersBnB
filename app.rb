@@ -12,7 +12,8 @@ require './lib/listing'
 require './lib/booking'
 require './lib/booking_requests'
 require './lib/uploader'
-# require './lib/image'
+require './lib/bookable_day'
+require './lib/available_day'
 
 # Configure Carrierwave
 CarrierWave.configure do |config|
@@ -30,17 +31,11 @@ class MakersBnB < Sinatra::Base
   get '/' do
     @user = User.find_by(id: session[:user_id]) || nil
     @feed = Listing.all
-
-
-
     @page = erb(:index)
-
-
     erb(:template)
   end
 
   post '/listing/create' do
-
     listing = Listing.create(
       name: params[:name],
       description: params[:description],
@@ -50,18 +45,12 @@ class MakersBnB < Sinatra::Base
       user_id: session[:user_id],
       photo_src: params[:image]
     )
-
-    # listing.update()
-    # img = Image.new
-    # img.image = params[:image]
-    # img.listing_id = listing.id
-    # img.save!
-
-
+    AvailableDay.new_listing_days(listing_id: listing.id, days_hash: params[:date])
     redirect '/'
   end
 
   get '/listing/new' do
+    @days = BookableDay.all
     @page = erb(:add_listing)
     erb(:template)
   end
@@ -101,7 +90,7 @@ class MakersBnB < Sinatra::Base
       user_id: listing.user_id,
       listing_id: listing.id,
       guest: session[:user_id],
-      requested_date: listing.available_date
+      bookable_day_id: params[:date]
     )
     redirect '/'
   end
@@ -149,8 +138,6 @@ class MakersBnB < Sinatra::Base
     redirect '/'
   end
 
-  # Delete a listing
-  # duplicate? Is this needed?
   post '/listing/:id/delete' do
     Listing.delete(id: params[:listing_id])
     redirect '/'
@@ -161,10 +148,6 @@ class MakersBnB < Sinatra::Base
     @page = erb(:bookings_list)
     erb(:template)
   end
-
-
-
-
 
   run! if app_file == $0
 
