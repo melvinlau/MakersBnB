@@ -13,6 +13,7 @@ require './lib/booking'
 require './lib/booking_requests'
 require './lib/uploader'
 require './lib/image'
+require './lib/bookable_day'
 
 # Configure Carrierwave
 CarrierWave.configure do |config|
@@ -36,6 +37,10 @@ class MakersBnB < Sinatra::Base
   end
 
   post '/listing/create' do
+    p "-------------------------"
+    p params[:date]
+    p "-------------------------"
+
 
     listing = Listing.create(
       name: params[:name],
@@ -55,6 +60,7 @@ class MakersBnB < Sinatra::Base
   end
 
   get '/listing/new' do
+    @days = BookableDay.all
     @page = erb(:add_listing)
     erb(:template)
   end
