@@ -10,10 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_23_104015) do
+ActiveRecord::Schema.define(version: 2019_10_24_120835) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "available_days", force: :cascade do |t|
+    t.bigint "listing_id"
+    t.bigint "bookable_day_id"
+    t.index ["bookable_day_id"], name: "index_available_days_on_bookable_day_id"
+    t.index ["listing_id"], name: "index_available_days_on_listing_id"
+  end
+
+  create_table "bookable_days", force: :cascade do |t|
+    t.datetime "days"
+  end
 
   create_table "booking_requests", force: :cascade do |t|
     t.bigint "user_id"
@@ -43,8 +54,8 @@ ActiveRecord::Schema.define(version: 2019_10_23_104015) do
     t.float "price"
     t.string "location"
     t.string "photo_src"
-    t.datetime "available_date"
     t.integer "user_id"
+    t.string "test"
   end
 
   create_table "users", force: :cascade do |t|

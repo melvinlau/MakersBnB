@@ -11,6 +11,7 @@ gem 'sinatra-activerecord'
 gem 'activerecord'
 gem 'carrierwave'
 gem 'mini_magick'
+gem 'rails'
 
 
 group :test do
