@@ -14,6 +14,7 @@ require './lib/booking_requests'
 require './lib/uploader'
 require './lib/image'
 require './lib/bookable_day'
+require './lib/available_day'
 
 # Configure Carrierwave
 CarrierWave.configure do |config|
@@ -55,6 +56,8 @@ class MakersBnB < Sinatra::Base
     img.image = params[:image]
     img.listing_id = listing.id
     img.save!
+
+    AvailableDay.new_listing_days(listing_id: listing.id, days_hash: params[:date])
 
     redirect '/'
   end
