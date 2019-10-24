@@ -12,7 +12,7 @@
 <br>
   Location: <%=@listing.location %>
 <br>
-  Availabilty: <%= @listing.available_date %>
+  Availabilty: <%= @listing.available_date.strftime("%a %e %b %Y") %>
 </div>
 <br>
 

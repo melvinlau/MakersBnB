@@ -62,8 +62,8 @@ class MakersBnB < Sinatra::Base
   get '/listing/:id' do
     @listing = Listing.find_by(id: params[:id])
     @host_user = User.find_by(id: @listing.user_id)
-    @user = User.find_by(id: session[:user_id]) 
-    @image = Image.find_by(id: @listing.id)
+    @user = User.find_by(id: session[:user_id])
+    @image = Image.find_by(listing_id: @listing.id)
     @page = erb(:complete_listing)
     erb(:template)
   end
