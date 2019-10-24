@@ -12,7 +12,7 @@ class BookingRequest < ActiveRecord::Base
       requests.push( {
         listing_name: Listing.find_by(id: br.listing_id).name,
         guest: User.find_by(id: br.guest).name,
-        requested_date: br.requested_date,
+        requested_date: BookableDay.find_by(id: br.bookable_day_id).days,
         br_id: br.id
       })
     }
