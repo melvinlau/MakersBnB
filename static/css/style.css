@@ -7,6 +7,10 @@ h1 {
   font-family: 'Righteous', sans-serif;
 }
 
+h2 {
+  color: #BB86FC;
+}
+
 h4 {
   color: #9B9B9B;
 }
@@ -18,36 +22,38 @@ h4 {
   text-decoration: none;
 }
 
-.peep {
+.listing {
   background-color: #1F1B24;
   border-radius: 10px;
   box-shadow: 2px 2px #000;
 }
 
-.author {
-  color: #21e6c1;
+.listing-name {
+  font-size: 2rem;
 }
 
-.handle {
-  color: #9B9B9B;
+.listing-name a:link,
+.listing-name a:visited {
+  color: #BB86FC;
+  text-decoration: none;
 }
 
-.peep-content {
+.listing-price {
   font-size: 1.4rem;
 }
 
-.peep-empty {
+.listing-empty {
   font-size: 1.4rem;
   color: #9B9B9B;
 }
 
-.peep-timestamp {
+.listing-timestamp {
   font-size: 0.8rem;
   font-weight: bold;
   color: #9B9B9B;
 }
 
-.add-peep textarea {
+.add-listing textarea {
   width: 100%;
   font-size: 1.2rem;
   padding: 10px;
@@ -58,6 +64,9 @@ h4 {
 
 .listing-image {
   width: 700px;
+}
+
+.listing-thumb {
 }
 
 .sign-up input[type="text"],
