@@ -23,9 +23,10 @@ class BookingRequest < ActiveRecord::Base
     br = BookingRequest.find_by(id: id)
     Booking.create(
       user_id: br.guest,
-      requested_date: br.requested_date,
+      bookable_day_id: br.bookable_day_id,
       listing_id: br.listing_id
     )
+    AvailableDay.delete_by(listing_id: br.listing_id, bookable_day_id: br.bookable_day_id)
     BookingRequest.delete(br.id)
   end
 end
