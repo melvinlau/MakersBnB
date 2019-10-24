@@ -19,6 +19,9 @@
                 <strong> <%= listing.name %> </strong>
             </a>
           </div>
+          <div class="thumb">
+            <img src='/media<%= "#{listing.photo_src.url}".gsub("/uploads/", "/uploads/thumb_") %>' class="listing-thumb">
+          </div>
           <div class="listing-content mb-3"> Price: <b>£<%= listing.price.floor %> per night</b> </div>
         </div>
 

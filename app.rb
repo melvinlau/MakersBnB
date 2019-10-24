@@ -12,7 +12,7 @@ require './lib/listing'
 require './lib/booking'
 require './lib/booking_requests'
 require './lib/uploader'
-require './lib/image'
+# require './lib/image'
 
 # Configure Carrierwave
 CarrierWave.configure do |config|
@@ -31,7 +31,11 @@ class MakersBnB < Sinatra::Base
     @user = User.find_by(id: session[:user_id]) || nil
     @feed = Listing.all
 
+
+
     @page = erb(:index)
+
+
     erb(:template)
   end
 
@@ -43,13 +47,15 @@ class MakersBnB < Sinatra::Base
       price: params[:price],
       location: params[:location],
       available_date: params[:available_date],
-      user_id: session[:user_id]
+      user_id: session[:user_id],
+      photo_src: params[:image]
     )
 
-    img = Image.new
-    img.image = params[:image]
-    img.listing_id = listing.id
-    img.save!
+    # listing.update()
+    # img = Image.new
+    # img.image = params[:image]
+    # img.listing_id = listing.id
+    # img.save!
 
 
     redirect '/'
@@ -64,7 +70,6 @@ class MakersBnB < Sinatra::Base
     @listing = Listing.find_by(id: params[:id])
     @host_user = User.find_by(id: @listing.user_id)
     @user = User.find_by(id: session[:user_id])
-    @image = Image.find_by(listing_id: @listing.id)
     @page = erb(:complete_listing)
     erb(:template)
   end
