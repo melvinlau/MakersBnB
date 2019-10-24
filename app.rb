@@ -5,7 +5,7 @@ require 'sinatra/activerecord'
 require 'bcrypt'
 require 'carrierwave'
 require 'carrierwave/orm/activerecord'
-# require 'minimagick'
+require 'mini_magick'
 
 require './lib/user'
 require './lib/listing'
