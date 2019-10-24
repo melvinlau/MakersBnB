@@ -100,7 +100,8 @@ class MakersBnB < Sinatra::Base
       user_id: listing.user_id,
       listing_id: listing.id,
       guest: session[:user_id],
-      requested_date: listing.available_date
+      requested_date: listing.available_date,
+      bookable_day_id: params[:date]
     )
     redirect '/'
   end
