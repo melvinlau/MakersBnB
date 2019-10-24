@@ -25,6 +25,10 @@
 <% elsif @user %>
 
   <form action="/booking-request/new" method="post">
+    <% @listing.bookable_days.each do |day| %>
+      <input type="radio" name="date" value=<%=day.id%>> <%= day.days.strftime("%a %e %b %Y") %>
+      <br>
+    <% end %>
     <input type="hidden" name="listing" value=<%= @listing.id %>>
     <input class="btn btn-dark btn-sm" type="submit" value="Request to Book">
   </form>

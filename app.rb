@@ -38,10 +38,6 @@ class MakersBnB < Sinatra::Base
   end
 
   post '/listing/create' do
-    p "-------------------------"
-    p params[:date]
-    p "-------------------------"
-
 
     listing = Listing.create(
       name: params[:name],
