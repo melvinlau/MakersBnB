@@ -51,6 +51,7 @@ class MakersBnB < Sinatra::Base
     img.listing_id = listing.id
     img.save!
 
+
     redirect '/'
   end
 
