@@ -36,20 +36,23 @@ class MakersBnB < Sinatra::Base
   end
 
   post '/listing/create' do
+    p "---------------"
+    p params[:image]
+    p "---------------"
     listing = Listing.create(
       name: params[:name],
       description: params[:description],
       price: params[:price],
       location: params[:location],
-      available_date: params[:available_date],
       user_id: session[:user_id],
-      photo_src: params[:image]
+      photo_src: "need to fix!!"
     )
     AvailableDay.new_listing_days(listing_id: listing.id, days_hash: params[:date])
     redirect '/'
   end
 
   get '/listing/new' do
+    BookableDay.generate(today: DateTime.now.midnight)
     @days = BookableDay.all
     @page = erb(:add_listing)
     erb(:template)

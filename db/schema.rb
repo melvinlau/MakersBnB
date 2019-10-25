@@ -60,10 +60,6 @@ ActiveRecord::Schema.define(version: 2019_10_24_145219) do
     t.string "test"
   end
 
-  create_table "uploads", force: :cascade do |t|
-    t.string "file"
-  end
-
   create_table "users", force: :cascade do |t|
     t.string "email"
     t.string "password"
