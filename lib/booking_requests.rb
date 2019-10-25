@@ -28,5 +28,6 @@ class BookingRequest < ActiveRecord::Base
     )
     AvailableDay.delete_by(listing_id: br.listing_id, bookable_day_id: br.bookable_day_id)
     BookingRequest.delete(br.id)
+
   end
 end
