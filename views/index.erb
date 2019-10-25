@@ -1,20 +1,19 @@
 <% if @feed.length > 0 %> <!-- If there is at least one listing -->
 
   <% @feed.each do |listing| %>
-    <div class="listing row m-3" id="listing-<%= listing.id %>">
-      <div class="col-8 p-4">
+    <div class="listing-feed-item row m-3" id="listing-<%= listing.id %>"
+      style="background: url('/media<%= listing.photo_src.url%>') center center; background-size: cover;">
+      <div class="listing-feed-item-content col-12">
         <div class ="listing-name">
           <a class="mb-2" href="/listing/<%= listing.id %>">
             <strong> <%= listing.name %> </strong>
           </a>
         </div>
+        <div class="listing-location">
+          <%= listing.location %> 
+        </div>
         <div class="listing-price mb-3">
           Price: <b>£<%= listing.price.floor %> per night</b>
-        </div>
-      </div>
-      <div class="col-4">
-        <div class="thumb">
-          <img src='/media<%= "#{listing.photo_src.url}".gsub("/uploads/", "/uploads/thumb_") %>' class="listing-thumb">
         </div>
       </div>
     </div>

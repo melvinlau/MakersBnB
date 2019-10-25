@@ -26,19 +26,35 @@ form {
   text-decoration: none;
 }
 
-.listing {
+.listing-feed-item {
   background-color: #1F1B24;
   border-radius: 10px;
   box-shadow: 2px 2px #000;
+  height: 400px;
+}
+
+.listing-feed-item-content {
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  vertical-align: middle;
 }
 
 .listing-name {
+  font-size: 3rem;
+  margin-top: 40px;
+  color: #FFFFFF;
+  text-shadow: 2px 2px #333333;
+}
+
+.listing-location {
   font-size: 2rem;
+  margin-top: 40px;
 }
 
 .listing-name a:link,
 .listing-name a:visited {
-  color: #BB86FC;
+  color: #FFFFFF;
   text-decoration: none;
 }
 
@@ -71,6 +87,7 @@ form {
 }
 
 .listing-thumb {
+  max-width: 100px;
 }
 
 .flash-notice {
