@@ -19,8 +19,10 @@
     AVAILABLE DAYS:
     <br>
     <% @days.each do |day| %>
-      <input type="checkbox" name="date[<%= day.id %>]" value=<%=day.days%>> <%= day.days.strftime("%a %e %b %Y") %>
-      <br>
+      <% if day.days >= Date.today + 1 %>
+        <input type="checkbox" name="date[<%= day.id %>]" value=<%=day.days%>> <%= day.days.strftime("%a %e %b %Y") %>
+        <br>
+      <% end %>
     <% end %>
 
     <br>

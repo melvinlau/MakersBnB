@@ -3,7 +3,7 @@ class BookableDay < ActiveRecord::Base
   has_many :listings, through: :available_days
 
   def self.generate(today:)
-    for d in (0..13) do
+    for d in (1..15) do
       day = today + d.day
       unless BookableDay.find_by(days: day)
         BookableDay.create(days: day)
