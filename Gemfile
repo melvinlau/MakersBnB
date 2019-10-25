@@ -12,6 +12,7 @@ gem 'activerecord'
 gem 'carrierwave'
 gem 'mini_magick'
 gem 'rails'
+gem 'pony'
 
 
 group :test do

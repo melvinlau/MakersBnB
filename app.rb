@@ -14,6 +14,9 @@ require './lib/booking_requests'
 require './lib/uploader'
 require './lib/bookable_day'
 require './lib/available_day'
+require './ponymailer.rb'
+
+
 
 # Configure Carrierwave
 CarrierWave.configure do |config|
@@ -116,6 +119,29 @@ class MakersBnB < Sinatra::Base
 
   post '/booking/new' do
     BookingRequest.confirm(id: params[:br_id])
+    redirect '/booking/confirm'
+  end
+
+  get '/booking/confirm' do
+    options = { :via_options           => {
+      :address              => "smtp.gmail.com",
+      :port                 => 587,
+      :user_name            => 'makersbnb2019@gmail.com',
+      :password             => 'testtickles2019',
+      :authentication       => 'plain',
+      :enable_starttls_auto => true,
+  },
+  :via                  => :smtp }
+  p ENV['EMAIL']
+
+    mailer = Mailer.new(options)
+
+    details = { to: 'makersbnb2019@gmail.com',
+                from: 'makersbnb2019@gmail.com',
+                subject: 'MakersBnB booking confirmed!',
+                template_path: 'views/awesome_email.html.erb' }
+    
+    mailer.awesome_email(details)
     redirect '/requests'
   end
 
