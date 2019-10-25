@@ -18,11 +18,20 @@
     <div class="row">
       <div class="col-12 mt-3">
         <h1>MakersBnB</h1>
-        <h3> A product of TTT </h3>
-        <h4><i> "We won't give you the shaft"</i></h4>
       </div>
     </div>
-    <%= @page %>
+    <div class="row">
+      <div class="col-8 pl-3 py-2">
+        <%= @page %>
+      </div>
+      <div class="col-4 pr-3 py-2">
+        <%= @sidebar %>
+      </div>
+    </div>
+
+    <div class="col-12 my-3">
+      &copy; A product of <strong>TTT</strong> &nbsp; <i>"We won't give you the shaft"</i>
+    </div>
   </div>
 </body>
 </html>

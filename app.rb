@@ -29,11 +29,14 @@ class MakersBnB < Sinatra::Base
 
   # Index Page
   get '/' do
-    @user = User.find_by(id: session[:user_id]) || nil
     @feed = Listing.all
     @page = erb(:index)
+    @user = User.find_by(id: session[:user_id])
+    @sidebar = erb(:sidebar)
     erb(:template)
   end
+
+  # ========= LISTING
 
   post '/listing/create' do
     listing = Listing.create(
@@ -52,14 +55,17 @@ class MakersBnB < Sinatra::Base
   get '/listing/new' do
     @days = BookableDay.all
     @page = erb(:add_listing)
+    @user = User.find_by(id: session[:user_id])
+    @sidebar = erb(:sidebar)
     erb(:template)
   end
 
   get '/listing/:id' do
     @listing = Listing.find_by(id: params[:id])
     @host_user = User.find_by(id: @listing.user_id)
-    @user = User.find_by(id: session[:user_id])
     @page = erb(:complete_listing)
+    @user = User.find_by(id: session[:user_id])
+    @sidebar = erb(:sidebar)
     erb(:template)
   end
 
@@ -67,6 +73,8 @@ class MakersBnB < Sinatra::Base
     Listing.delete(params[:id])
     redirect '/'
   end
+
+  # ========= BOOKING
 
   delete '/booking/:id' do
     Booking.delete(params[:id])
@@ -81,6 +89,8 @@ class MakersBnB < Sinatra::Base
   get '/requests' do
     @requests = BookingRequest.get_user_requests(user_id: session[:user_id])
     @page = erb(:booking_request_list)
+    @user = User.find_by(id: session[:user_id])
+    @sidebar = erb(:sidebar)
     erb(:template)
   end
 
@@ -99,6 +109,8 @@ class MakersBnB < Sinatra::Base
     BookingRequest.confirm(id: params[:br_id])
     redirect '/requests'
   end
+
+  # ========= USER
 
   # Sign Up
   post '/users/new' do
@@ -146,6 +158,8 @@ class MakersBnB < Sinatra::Base
   get '/bookings' do
     @bookings = Booking.get_user_bookings(user_id: session[:user_id])
     @page = erb(:bookings_list)
+    @user = User.find_by(id: session[:user_id])
+    @sidebar = erb(:sidebar)
     erb(:template)
   end
 
