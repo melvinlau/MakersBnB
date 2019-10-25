@@ -44,7 +44,6 @@ class MakersBnB < Sinatra::Base
       description: params[:description],
       price: params[:price],
       location: params[:location],
-      available_date: params[:available_date],
       user_id: session[:user_id],
       photo_src: params[:image]
     )
@@ -61,10 +60,13 @@ class MakersBnB < Sinatra::Base
   end
 
   get '/listing/:id' do
+    @user = User.find_by(id: session[:user_id])
     @listing = Listing.find_by(id: params[:id])
     @host_user = User.find_by(id: @listing.user_id)
     @page = erb(:complete_listing)
-    @user = User.find_by(id: session[:user_id])
+    p "-------------------"
+    p session[:user_id]
+    p "-------------------"
     @sidebar = erb(:sidebar)
     erb(:template)
   end

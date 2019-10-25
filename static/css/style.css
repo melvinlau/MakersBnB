@@ -3,6 +3,15 @@ body {
   color: #FFF;
 }
 
+a:link, a:visited {
+  color: #FFFFFF;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #EFEFEF;
+}
+
 h1 {
   font-family: 'Righteous', sans-serif;
 }
@@ -30,7 +39,7 @@ form {
   background-color: #1F1B24;
   border-radius: 10px;
   box-shadow: 2px 2px #000;
-  height: 400px;
+  vertical-align: middle;
 }
 
 .listing-feed-item-content {
@@ -50,12 +59,6 @@ form {
 .listing-location {
   font-size: 2rem;
   margin-top: 40px;
-}
-
-.listing-name a:link,
-.listing-name a:visited {
-  color: #FFFFFF;
-  text-decoration: none;
 }
 
 .listing-price {
