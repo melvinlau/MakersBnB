@@ -45,7 +45,7 @@ class MakersBnB < Sinatra::Base
       price: params[:price],
       location: params[:location],
       user_id: session[:user_id],
-      photo_src: "need to fix!!"
+      photo_src: params[:image]
     )
     AvailableDay.new_listing_days(listing_id: listing.id, days_hash: params[:date])
     redirect '/'
